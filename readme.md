@@ -9,8 +9,14 @@
 
 ## Getting Started
 
-To start the project:
+To install the project:
 
 ```bash
 npm install
+```
+
+To start the project:
+
+```bash
+npm start
 ```
