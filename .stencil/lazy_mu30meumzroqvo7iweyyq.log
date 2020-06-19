@@ -1,0 +1,22 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { MusicPlayer, PowerOn, PowerOff } from '../../global/State/MusicPlayer';
+export const StatePattern = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.musicPlayer = new MusicPlayer();
+    }
+    render() {
+        return (h("div", null, h("h3", null, "State Pattern"), h("h5", null, "Music Player"), h("button", { class: this.powerOn ? "btn-large" : "btn-large red", onClick: () => this.pressedPower() }, h("i", { class: "material-icons" }, "power_settings_new")), h("div", { ref: el => this.result = el })));
+    }
+    pressedPower() {
+        const state = this.musicPlayer.getState;
+        debugger;
+        this.powerOn = state.pressedPower();
+        this.powerOn ? this.musicPlayer.setState = new PowerOn() : this.musicPlayer.setState = new PowerOff();
+    }
+    componentDidLoad() {
+        this.musicPlayer.setState = new PowerOff();
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-state"; }
+};

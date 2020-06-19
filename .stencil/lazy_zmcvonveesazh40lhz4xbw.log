@@ -1,0 +1,34 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { Host, h } from "@stencil/core";
+import { ObserverObject } from '../../global/Observer/ObserverPattern';
+export const Observer = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.willLoadObserverObject = new ObserverObject();
+        this.didLoadObserverObject = new ObserverObject();
+    }
+    render() {
+        return (h(Host, null, h("slot", null, h("button", { onClick: _ => this.willLoadObserverObject.fire() }, "Fire Event1"), h("button", { onClick: _ => this.didLoadObserverObject.fire() }, "Fire Event2"), h("div", { ref: el => this.result = el }))));
+    }
+    componentWillLoad() {
+        this.willLoadObserverObject.subscribe(this.fn1.bind(this));
+        this.willLoadObserverObject.subscribe(this.fn2.bind(this));
+    }
+    componentDidLoad() {
+        this.didLoadObserverObject.subscribe(this.fn3.bind(this));
+        this.didLoadObserverObject.subscribe(this.fn4.bind(this));
+    }
+    fn1() {
+        this.result.innerHTML += "fn1 <br/>";
+    }
+    fn2() {
+        this.result.innerHTML += "fn2 <br/>";
+    }
+    fn3() {
+        this.result.innerHTML += "fn3 <br/>";
+    }
+    fn4() {
+        this.result.innerHTML += "fn4 <br/>";
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-observer"; }
+};

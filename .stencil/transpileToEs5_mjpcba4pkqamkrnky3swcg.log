@@ -1,0 +1,26 @@
+System.register(['./p-70e1058c.system.js'], function (exports) {
+    'use strict';
+    var registerInstance, h;
+    return {
+        setters: [function (module) {
+                registerInstance = module.r;
+                h = module.h;
+            }],
+        execute: function () {
+            var AppHome = exports('app_home', /** @class */ (function () {
+                function class_1(hostRef) {
+                    registerInstance(this, hostRef);
+                }
+                class_1.prototype.render = function () {
+                    return (h("div", { class: 'app-home', id: "home" }, h("div", { class: "row" }, h("div", { class: "col s4" }, h("h4", null, "Creational"), h("a", { class: "btn waves-effect waves-light cyan", href: "/factory" }, "Factory"), h("a", { class: "btn waves-effect waves-light cyan", href: "/singleton" }, "Singleton")), h("div", { class: "col s4" }, h("h4", null, "Structural"), h("a", { class: "btn waves-effect waves-light blue", href: "/adapter" }, "Adapter"), h("a", { class: "btn waves-effect waves-light blue", href: "/bridge" }, "Bridge"), h("a", { class: "btn waves-effect waves-light blue", href: "/composite" }, "Composite"), h("a", { class: "btn waves-effect waves-light blue", href: "/decorator" }, "Decorator"), h("a", { class: "btn waves-effect waves-light blue", href: "/facade" }, "Facade"), h("a", { class: "btn waves-effect waves-light blue", href: "/flyweight" }, "Flyweight"), h("a", { class: "btn waves-effect waves-light blue", href: "/proxy" }, "Proxy")), h("div", { class: "col s4" }, h("h4", null, "Behavioral"), h("a", { class: "btn waves-effect waves-light", href: "/memento" }, "Memento"), h("a", { class: "btn waves-effect waves-light", href: "/command" }, "Command"), h("a", { class: "btn waves-effect waves-light", href: "/state" }, "State"), h("a", { class: "btn waves-effect waves-light", href: "/strategy" }, "Strategy"), h("a", { class: "btn waves-effect waves-light", href: "/template" }, "Template"), h("a", { class: "btn waves-effect waves-light", href: "/iterator" }, "Iterator"), h("a", { class: "btn waves-effect waves-light", href: "/observer" }, "Observer"), h("a", { class: "btn waves-effect waves-light", href: "/chain" }, "Chain of Responsibility")))));
+                };
+                Object.defineProperty(class_1, "style", {
+                    get: function () { return "STYLE_TEXT_PLACEHOLDER:app-home"; },
+                    enumerable: true,
+                    configurable: true
+                });
+                return class_1;
+            }()));
+        }
+    };
+});

@@ -1,0 +1,164 @@
+System.register(['./p-70e1058c.system.js'], function (exports) {
+    'use strict';
+    var registerInstance, h;
+    return {
+        setters: [function (module) {
+                registerInstance = module.r;
+                h = module.h;
+            }],
+        execute: function () {
+            var ArrayIteratorHistory = /** @class */ (function () {
+                function ArrayIteratorHistory() {
+                    this.data = [];
+                }
+                ArrayIteratorHistory.prototype.push = function (data) {
+                    this.data.push(data);
+                    console.log(this.data);
+                };
+                ArrayIteratorHistory.prototype.pop = function () {
+                    return this.data.pop();
+                };
+                ArrayIteratorHistory.prototype.createIterator = function (order) {
+                    if (order === void 0) { order = 0; }
+                    return new ArrayIteratorHistory.ArrayIterator(this, order);
+                };
+                return ArrayIteratorHistory;
+            }());
+            // Concrete class inside of history class
+            ArrayIteratorHistory.ArrayIterator = /** @class */ (function () {
+                function ArrayIterator(history, order) {
+                    this.history = history;
+                    this.order = order;
+                    if (order === 0) {
+                        this.index = 0;
+                    }
+                    else if (order === 1) {
+                        this.index = this.history.data.length - 1;
+                    }
+                }
+                ArrayIterator.prototype.hasNext = function () {
+                    if (this.order === 0) {
+                        return this.index < this.history.data.length;
+                    }
+                    else if (this.order === 1) {
+                        return this.index >= 0;
+                    }
+                };
+                ArrayIterator.prototype.current = function () {
+                    return this.history.data[this.index];
+                };
+                ArrayIterator.prototype.next = function () {
+                    this.order === 0 ? this.index++ : this.index--;
+                };
+                return ArrayIterator;
+            }());
+            var FixedArrayIteratorHistory = /** @class */ (function () {
+                function FixedArrayIteratorHistory() {
+                    this.data = new Array(10).fill("");
+                    Object.seal(this.data);
+                    this.count = 0;
+                }
+                FixedArrayIteratorHistory.prototype.push = function (data) {
+                    if (this.count === this.data.length) {
+                        var copied = this.data.slice(1);
+                        copied.push(data);
+                        this.data = copied;
+                    }
+                    else {
+                        this.data[this.count++] = data;
+                    }
+                    console.log(this.data);
+                };
+                FixedArrayIteratorHistory.prototype.pop = function () {
+                    return this.data[--this.count];
+                };
+                FixedArrayIteratorHistory.prototype.createIterator = function (order) {
+                    if (order === void 0) { order = 0; }
+                    return new FixedArrayIteratorHistory.ArrayIterator(this, order);
+                };
+                return FixedArrayIteratorHistory;
+            }());
+            // Concrete class inside of history class
+            FixedArrayIteratorHistory.ArrayIterator = /** @class */ (function () {
+                function ArrayIterator(history, order) {
+                    this.history = history;
+                    this.order = order;
+                    if (order === 0) {
+                        this.index = 0;
+                    }
+                    else if (order === 1) {
+                        this.index = this.history.data.length - 1;
+                    }
+                }
+                ArrayIterator.prototype.hasNext = function () {
+                    if (this.order === 0) {
+                        return this.index < this.history.data.length;
+                    }
+                    else if (this.order === 1) {
+                        return this.index >= 0;
+                    }
+                };
+                ArrayIterator.prototype.current = function () {
+                    return this.history.data[this.index];
+                };
+                ArrayIterator.prototype.next = function () {
+                    this.order === 0 ? this.index++ : this.index--;
+                };
+                return ArrayIterator;
+            }());
+            var Iterator = exports('app_iterator', /** @class */ (function () {
+                function class_1(hostRef) {
+                    registerInstance(this, hostRef);
+                    this.history = new ArrayIteratorHistory();
+                    this.fixedHistory = new FixedArrayIteratorHistory();
+                }
+                class_1.prototype.render = function () {
+                    var _this = this;
+                    return (h("div", { class: "margin20" }, h("h3", null, "Iterator Pattern"), h("h6", { class: "grayHint" }, "- Allows iterating over an object without exposing the object's internal structure"), h("h6", { class: "grayHint" }, "- \uAC1D\uCCB4\uC758 \uB0B4\uBD80 \uAD6C\uC870\uB97C \uB178\uCD9C\uD558\uC9C0 \uC54A\uACE0 \uAC1D\uCCB4\uB97C \uBC18\uBCF5\uD558\uB294 \uC124\uACC4 \uBC29\uBC95."), h("br", null), h("h5", null, "Example 1) Array Iterator "), h("input", { type: "text", ref: function (el) { return _this.userInput1 = el; }, placeholder: "Type something to save on the history object." }), h("div", { class: "btnDiv" }, h("button", { class: "btn", onClick: function (_) { return _this.addToHistory(); } }, "Add to history"), h("button", { onClick: function (_) { return _this.iterate1ASC(); }, class: "btn blue" }, "ITERATE starting from the first element"), h("button", { onClick: function (_) { return _this.iterate1DESC(); }, class: "btn blue" }, "ITERATE starting from the last element")), h("h6", { class: "margin20" }, "Array Iterator History Result"), h("div", { ref: function (el) { return _this.result1 = el; }, class: "margin20 resultDiv" }), h("hr", null), h("h5", null, "Example 2) Fixed Array Iterator: This history saves only the last 10 elements."), h("input", { type: "text", ref: function (el) { return _this.userInput2 = el; }, placeholder: "Type something to save on the history object." }), h("div", { class: "btnDiv" }, h("button", { class: "btn teal darken-3", onClick: function (_) { return _this.addToFixedHistory(); } }, "Add to fixed history"), h("button", { onClick: function (_) { return _this.iterate2ASC(); }, class: "btn blue darken-3" }, "ITERATE starting from the first element"), h("button", { onClick: function (_) { return _this.iterate2DESC(); }, class: "btn blue darken-3" }, "ITERATE starting from the last element")), h("h6", { class: "margin20" }, "Fixed Array Iterator History Result"), h("div", { ref: function (el) { return _this.result2 = el; }, class: "margin20 resultDiv" }), h("pattern-photos", { uml: "iterator-uml.png", imp: "iterator-i.png", cl: "iterator-1.png" })));
+                };
+                class_1.prototype.addToHistory = function () {
+                    this.history.push(this.userInput1.value);
+                    this.userInput1.value = "";
+                };
+                class_1.prototype.iterate1ASC = function () {
+                    var iterator = this.history.createIterator();
+                    while (iterator.hasNext()) {
+                        this.result1.innerHTML += iterator.current() + "<br/>";
+                        iterator.next();
+                    }
+                };
+                class_1.prototype.iterate1DESC = function () {
+                    var iterator = this.history.createIterator(1);
+                    while (iterator.hasNext()) {
+                        this.result1.innerHTML += iterator.current() + "<br/>";
+                        iterator.next();
+                    }
+                };
+                class_1.prototype.addToFixedHistory = function () {
+                    this.fixedHistory.push(this.userInput2.value);
+                    this.userInput2.value = "";
+                };
+                class_1.prototype.iterate2ASC = function () {
+                    var iterator = this.fixedHistory.createIterator();
+                    while (iterator.hasNext()) {
+                        this.result2.innerHTML += iterator.current() + "<br/>";
+                        iterator.next();
+                    }
+                };
+                class_1.prototype.iterate2DESC = function () {
+                    var iterator = this.fixedHistory.createIterator(1);
+                    while (iterator.hasNext()) {
+                        this.result2.innerHTML += iterator.current() + "<br/>";
+                        iterator.next();
+                    }
+                };
+                Object.defineProperty(class_1, "style", {
+                    get: function () { return "STYLE_TEXT_PLACEHOLDER:app-iterator"; },
+                    enumerable: true,
+                    configurable: true
+                });
+                return class_1;
+            }()));
+        }
+    };
+});

@@ -1,0 +1,50 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { ObserverObject } from '../../global/Observer/ObserverPattern';
+import { RFIDPluginObserver } from '../../global/Observer/Observer';
+import { rfidPlugin } from '../../global/Observer/ObservableObject';
+export const Observer = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.eventOne = new ObserverObject();
+        this.eventTwo = new ObserverObject();
+        this.pluginObserver = new RFIDPluginObserver(rfidPlugin);
+    }
+    render() {
+        return (h("div", { class: "margin20" }, h("h3", null, "Observer Pattern"), h("button", { class: "btn margin20", onClick: _ => this.eventOne.fire() }, "Fire Event1"), h("button", { class: "btn margin20", onClick: _ => this.eventTwo.fire() }, "Fire Event2"), h("div", { ref: el => this.result = el }), h("button", { class: "btn margin20", onClick: _ => this.connect() }, "Connect"), h("button", { class: "btn margin20", onClick: _ => this.disconnect() }, "Disconnect"), h("div", { ref: el => this.result2 = el }, this.result_plugin)));
+    }
+    componentWillLoad() {
+        this.eventOne.subscribe(this.fn1.bind(this));
+        this.eventOne.subscribe(this.fn2.bind(this));
+        rfidPlugin.addObserver(this.pluginObserver);
+        function update() {
+            this.pluginObserver.update();
+        }
+        this.result2.addEventListener("update", () => { this.result_plugin = rfidPlugin.data; });
+    }
+    componentDidLoad() {
+        this.eventTwo.subscribe(this.fn3.bind(this));
+        this.eventTwo.subscribe(this.fn4.bind(this));
+    }
+    connect() {
+        rfidPlugin.data = "Connected";
+        //this.result_plugin = rfidPlugin.data;
+    }
+    disconnect() {
+        rfidPlugin.data = "Disconnected";
+        //this.result_plugin = rfidPlugin.data;
+    }
+    fn1() {
+        this.result.innerHTML += "fn1 <br/>";
+    }
+    fn2() {
+        this.result.innerHTML += "fn2 <br/>";
+    }
+    fn3() {
+        this.result.innerHTML += "fn3 <br/>";
+    }
+    fn4() {
+        this.result.innerHTML += "fn4 <br/>";
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-observer"; }
+};

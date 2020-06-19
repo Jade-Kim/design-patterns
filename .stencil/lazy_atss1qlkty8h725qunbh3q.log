@@ -1,0 +1,22 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { Host, h } from "@stencil/core";
+import { Singleton1 } from '../../global/Singleton/Singleton';
+export const Singleton = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.singletonOne = Singleton1.getInstance();
+        this.singletonTwo = Singleton1.getInstance();
+    }
+    render() {
+        return (h(Host, null, h("slot", null)));
+    }
+    componentDidLoad() {
+        this.singletonOne.setNumber(5);
+        console.log("SingletonOne: ", this.singletonOne.getNumber());
+        console.log("SingletonTwo: ", this.singletonTwo.getNumber());
+        this.singletonTwo.setNumber(99);
+        console.log("SingletonOne: ", this.singletonOne.getNumber());
+        console.log("SingletonTwo: ", this.singletonTwo.getNumber());
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-singleton"; }
+};

@@ -1,0 +1,38 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { Package } from '../../global/Strategy/Package';
+import { Shipping } from '../../global/Strategy/context';
+import { Fedex, UPS, USPS } from '../../global/Strategy/concreteStrategy';
+import { TheImage } from '../../global/Strategy2/Image';
+import { ImageStorage } from '../../global/Strategy2/context';
+import { PngCompressor, SoftFilter } from '../../global/Strategy2/concreteStrategy';
+export const Strategy = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("div", { class: "margin20" }, h("h3", null, "Strategy Pattern"), h("h5", null, "Example 1) Calculate shipping cost from different shipping companies "), h("div", { class: "row" }, h("div", { class: "col s4" }, h("input", { type: "text", placeholder: "From", ref: el => this.from = el })), h("div", { class: "col s4" }, h("input", { type: "text", placeholder: "To", ref: el => this.to = el })), h("div", { class: "col s4" }, h("input", { type: "number", placeholder: "Weight (lb)", ref: el => this.weight = el }))), h("button", { class: "btn", onClick: _ => this.calculate() }, "CALCULATE SHIPPING COST"), h("div", { ref: el => this.result = el, class: "resultDiv margin20" }), h("h5", null, "Example 2) Store the images that users upload "), h("input", { type: "text", placeholder: "File Name", ref: el => this.fileName = el }), h("button", { class: "btn", onClick: _ => this.upload() }, "UPLOAD PHOTO"), h("div", { ref: el => this.result2 = el, class: "resultDiv margin20" }), h("pattern-photos", { uml: "strategy-uml-1.png", uml2: "strategy-uml-2.png", imp: "strategy-i.png", cl: "strategy1.png", cl2: "strategy2.png" })));
+    }
+    calculate() {
+        const from = this.from.value;
+        const to = this.to.value;
+        const weight = Number(this.weight.value);
+        const thePackage = new Package(from, to, weight);
+        const shipping = new Shipping();
+        this.result.innerHTML = "";
+        this.result.innerHTML += `From ${from} To ${to} <br/> Package ${weight} lb <br/><br/>`;
+        shipping.setStrategy(new Fedex());
+        this.result.innerHTML += "Fedex: $" + shipping.calculate(thePackage) + "<br/>";
+        shipping.setStrategy(new UPS());
+        this.result.innerHTML += "UPS: $" + shipping.calculate(thePackage) + "<br/>";
+        shipping.setStrategy(new USPS());
+        this.result.innerHTML += "USPS: $" + shipping.calculate(thePackage) + "<br/>";
+    }
+    upload() {
+        const img = new TheImage(this.fileName.value);
+        const imgStorage = new ImageStorage();
+        imgStorage.store(img, new PngCompressor(), new SoftFilter());
+        this.result2.innerHTML = "Check out the developer console.";
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-strategy"; }
+};

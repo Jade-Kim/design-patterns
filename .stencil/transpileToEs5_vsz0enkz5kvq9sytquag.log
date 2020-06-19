@@ -1,0 +1,27 @@
+System.register(['./p-70e1058c.system.js'], function (exports) {
+    'use strict';
+    var registerInstance, h, Host;
+    return {
+        setters: [function (module) {
+                registerInstance = module.r;
+                h = module.h;
+                Host = module.H;
+            }],
+        execute: function () {
+            var Photos = exports('pattern_photos', /** @class */ (function () {
+                function class_1(hostRef) {
+                    registerInstance(this, hostRef);
+                }
+                class_1.prototype.render = function () {
+                    return (h(Host, null, h("slot", null, h("div", { class: "pattern-photos" }, h("h3", null, "UML"), h("img", { src: "../../assets/" + this.uml, class: "margin20 uml" }), this.uml2 && h("img", { src: "../../assets/" + this.uml2, class: "margin20 uml" }), h("h3", null, "Implementation"), h("img", { src: "../../assets/" + this.imp, class: "margin20" }), this.imp2 && h("img", { src: "../../assets/" + this.imp2, class: "" }), h("h3", null, "Class"), h("img", { src: "../../assets/" + this.cl, class: "" }), this.cl2 && h("img", { src: "../../assets/" + this.cl2, class: "" })))));
+                };
+                Object.defineProperty(class_1, "style", {
+                    get: function () { return "STYLE_TEXT_PLACEHOLDER:pattern-photos"; },
+                    enumerable: true,
+                    configurable: true
+                });
+                return class_1;
+            }()));
+        }
+    };
+});

@@ -1,0 +1,20 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { UserDBService } from '../../global/Command/Receiver';
+import { AddUserCommand } from '../../global/Command/ConcreteCommand';
+import { Button } from '../../global/Command/Invoker';
+export const Command = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("div", { class: "margin20" }, h("h3", null, "Command Pattern"), h("button", { class: "btn", onClick: _ => this.addUser() }, "Add User")));
+    }
+    addUser() {
+        const service = new UserDBService();
+        const command = new AddUserCommand(service);
+        const button = new Button(command);
+        button.click();
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-command"; }
+};

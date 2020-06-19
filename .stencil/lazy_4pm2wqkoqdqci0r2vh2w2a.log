@@ -1,0 +1,22 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { Authenticator, Logger } from '../../global/ChainOfResponsibility/Handler';
+import { WebServer } from '../../global/ChainOfResponsibility/WebServer';
+import { HTTPRequest } from '../../global/ChainOfResponsibility/HTTPRequest';
+export const Chain = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        // authenticator -> logger
+        this.logger = new Logger(null);
+        this.authenticator = new Authenticator(this.logger);
+        this.server = new WebServer(this.authenticator);
+    }
+    render() {
+        return (h("div", { class: "margin20" }, h("h3", null, "Chain of Responsiblility Pattern"), h("input", { placeholder: "Username", ref: el => this.username = el }), h("input", { placeholder: "Password", ref: el => this.pw = el }), h("button", { class: "waves-effect waves-light btn-large margin20", onClick: () => this.login() }, "Log in")));
+    }
+    login() {
+        const request = new HTTPRequest(this.username.value, this.pw.value);
+        this.server.handle(request);
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-chain"; }
+};

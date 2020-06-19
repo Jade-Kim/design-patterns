@@ -1,0 +1,40 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { MusicPlayer } from '../../global/State/context';
+import { PowerOn, PowerOff, Playing, Paused } from '../../global/State/concreteState';
+export const StatePattern = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.musicPlayer = new MusicPlayer();
+    }
+    render() {
+        return (h("div", { class: "margin20" }, h("h3", null, "State Pattern"), h("h6", { class: "grayHint" }, "- Lets an object to behave differently depending on the state now"), h("h6", { class: "grayHint" }, "- \uD604\uC7AC \uC0C1\uD0DC\uC5D0 \uB530\uB77C \uAC19\uC740 \uC774\uB984\uC758 \uBA54\uC18C\uB4DC\uAC00 \uB2E4\uB974\uAC8C \uC791\uB3D9\uD558\uBA70 Context \uB294 \uD558\uB098\uC758 State, \uC989 \uD558\uB098\uC758 current State \uB97C \uAC00\uC9C8 \uC218 \uC788\uB2E4."), h("br", null), h("h5", null, "Music Player"), h("h6", { class: "grayHint" }, "- Music Player Buttons behave differently depends on the current state of the music player."), h("h6", { class: "grayHint" }, "- \uC74C\uC545 \uD50C\uB808\uC774\uC5B4\uC758 \uC0C1\uD0DC\uC5D0 \uB530\uB77C \uC544\uB798 \uBC84\uD2BC\uC740 \uAC01\uAC01 \uB2E4\uB974\uAC8C \uC791\uB3D9\uD55C\uB2E4."), h("h6", { class: "blueHint" }, "- Music Player Current State: ", this.currentState), h("button", { class: this.powerOn ? "btn-large margin20" : "btn-large margin20 red", onClick: () => this.pressedPower() }, h("i", { class: "material-icons" }, "power_settings_new")), h("button", { class: "btn-large margin20", onClick: () => this.pressedPlay() }, h("i", { class: "material-icons" }, "play_arrow")), h("button", { class: "btn-large margin20", onClick: () => this.pressedPause() }, h("i", { class: "material-icons" }, "pause")), h("pattern-photos", { uml: "state-uml.png", imp: "state-i.png", cl: "state1.png", cl2: "state2.png" })));
+    }
+    pressedPower() {
+        const state = this.musicPlayer.getState;
+        this.powerOn = state.pressedPower();
+        if (this.powerOn) {
+            this.musicPlayer.setState = new PowerOn();
+            this.currentState = "Power On";
+        }
+        else {
+            this.musicPlayer.setState = new PowerOff();
+            this.currentState = "Power Off";
+        }
+    }
+    pressedPlay() {
+        const state = this.musicPlayer.getState;
+        this.currentState = state.pressedPlay();
+        this.powerOn ? this.musicPlayer.setState = new Playing() : '';
+    }
+    pressedPause() {
+        const state = this.musicPlayer.getState;
+        this.currentState = state.pressedPause();
+        this.powerOn ? this.musicPlayer.setState = new Paused() : '';
+    }
+    componentDidLoad() {
+        this.musicPlayer.setState = new PowerOff();
+        this.currentState = "Power Off";
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-state"; }
+};

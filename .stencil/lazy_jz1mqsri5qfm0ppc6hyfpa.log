@@ -1,0 +1,11 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { Host, h } from "@stencil/core";
+export const Photos = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h(Host, null, h("slot", null, h("div", { class: "pattern-photos" }, h("h3", null, "UML"), h("img", { src: "../../assets/" + this.uml, class: "margin20 uml" }), this.uml2 && h("img", { src: "../../assets/" + this.uml2, class: "margin20 uml" }), h("h3", null, "Implementation"), h("img", { src: "../../assets/" + this.imp, class: "margin20" }), this.imp2 && h("img", { src: "../../assets/" + this.imp2, class: "" }), h("h3", null, "Class"), h("img", { src: "../../assets/" + this.cl, class: "" }), this.cl2 && h("img", { src: "../../assets/" + this.cl2, class: "" })))));
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:pattern-photos"; }
+};

@@ -1,0 +1,29 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+export const AppHome = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.nextPenSlugs = [
+            '3d9a3b8092ebcf9bc4a72672b81df1ac',
+            '2cde50c59ea73c47aec5bd26343ce287',
+            'd83110c5f71ea23ba5800b6b1a4a95c4',
+        ];
+        //-------------------------------------//
+        // init Infinte Scroll
+        this.infScroll = new InfiniteScroll('.container', {
+            path: this.getPenPath,
+            append: '.post',
+            status: '.page-load-status',
+        });
+    }
+    render() {
+        return (h("div", { class: 'app-home' }, h("p", null, "Welcome to the Stencil App Starter. You can use this starter to build entire apps all with web components using Stencil! Check out our docs on ", h("a", { href: 'https://stenciljs.com' }, "stenciljs.com"), " to get started."), h("stencil-route-link", { url: '/profile/stencil' }, h("button", null, "Profile page")), h("h1", null, "Infinite Scroll, vanilla JS"), h("div", { class: "container" }, h("article", { class: "post" }, h("h1", null, "1a - Lorem ipsum dolor sit amet"), h("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique mauris nec sapien efficitur, sit amet varius est interdum. Curabitur quis sem felis. Curabitur at quam sit amet mi tempor tristique quis in lorem. Cras id felis sit amet erat accumsan ornare."), h("p", null, h("img", { src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg", alt: "orange-tree" })), h("p", null, "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."), h("p", null, "Nullam vel odio nec turpis consequat iaculis at ut nibh. Nulla interdum lacus vitae sapien porttitor congue sagittis ac felis.Curabitur in ligula porttitor, varius purus sed, elementum nibh. Nunc ut libero posuere.")), h("article", { class: "post" }, h("h1", null, "1b - Ullamcorper quam at"), h("p", null, "Ullamcorper quam at, hendrerit eros. Mauris quis vehicula enim."), h("p", null, h("img", { src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/cat-nose.jpg", alt: "cat nose" })), h("p", null, "Duis elementum nisi tortor, ut elementum quam mattis condimentum. Aenean vitae massa sit amet ligula sollicitudin venenatis. Praesent ultrices laoreet hendrerit. Duis tempus ullamcorper enim, ac volutpat augue faucibus sit amet."), h("p", null, "Donec at consequat elit. Suspendisse dignissim ante vitae urna rutrum cursus. Morbi finibus semper facilisis. In varius sem ut turpis molestie volutpat. Duis ut posuere est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis malesuada placerat luctus. In eget feugiat sapien. Sed gravida ultrices accumsan."), h("p", null, "In nec ex at mi scelerisque malesuada."), h("p", null, "Nullam arcu diam, mollis sit amet condimentum et, finibus in ex. Morbi bibendum magna vel tortor fringilla efficitur. Aliquam sed lectus lacus.")), h("article", { class: "post" }, h("h1", null, "1c - Orci varius natoque penatibus et magnis dis parturient montes"), h("p", null, "Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In varius turpis ipsum, et porta eros eleifend ullamcorper. Sed arcu nisl, rhoncus porta fermentum in, eleifend non dolor."), h("p", null, "Mauris sagittis a lectus eu fringilla. Maecenas varius cursus aliquam."), h("p", null, "Suspendisse maximus congue augue eu venenatis. Aliquam urna purus, suscipit ut purus vel, iaculis rhoncus nulla. Donec a velit elementum, pellentesque metus blandit, lacinia erat. Fusce pulvinar mattis erat ac efficitur. Pellentesque aliquam eleifend ligula, eu ullamcorper elit pretium sit amet."), h("p", null, "Praesent placerat eros sem, vel pretium libero pharetra nec. Morbi hendrerit eleifend commodo. Morbi sodales nunc purus, consequat eleifend nulla dignissim non.")), h("article", { class: "post" }, h("h1", null, "1d - Donec a urna in turpis maximus"), h("p", null, "Donec a urna in turpis maximus faucibus a nec mauris."), h("p", null, "Donec iaculis, justo a egestas venenatis, dui nisl faucibus urna, sit amet condimentum quam dui ut libero. Etiam aliquet urna quis nisi aliquam, vitae tincidunt est feugiat."), h("p", null, "Integer viverra at arcu quis faucibus. Praesent nec venenatis odio. Donec non mattis massa, quis vestibulum leo. Etiam eleifend diam ac magna egestas aliquam. Sed vulputate risus eget efficitur auctor. Mauris aliquam ac purus at semper. Praesent vulputate hendrerit eros, vitae semper turpis venenatis et. Proin et est felis. Etiam sem risus, elementum id cursus quis, laoreet quis orci. Cras eget fermentum lorem, vitae pharetra augue. Etiam tincidunt nulla faucibus, egestas lacus sed, semper metus.")), h("button", { onClick: () => this.infScroll.loadNextPage() }, "load more")), h("div", { class: "page-load-status" }, h("div", { class: "loader-ellips infinite-scroll-request" }, h("span", { class: "loader-ellips__dot" }), h("span", { class: "loader-ellips__dot" }), h("span", { class: "loader-ellips__dot" }), h("span", { class: "loader-ellips__dot" })), h("p", { class: "infinite-scroll-last" }, "End of content"), h("p", { class: "infinite-scroll-error" }, "No more pages to load"))));
+    }
+    getPenPath() {
+        var slug = this.nextPenSlugs[this.loadCount];
+        if (slug) {
+            return 'https://s.codepen.io/desandro/debug/' + slug;
+        }
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-home"; }
+};

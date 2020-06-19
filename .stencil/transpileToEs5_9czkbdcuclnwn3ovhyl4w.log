@@ -1,0 +1,104 @@
+System.register(['./p-70e1058c.system.js'], function (exports) {
+    'use strict';
+    var registerInstance, h;
+    return {
+        setters: [function (module) {
+                registerInstance = module.r;
+                h = module.h;
+            }],
+        execute: function () {
+            var Canvas = /** @class */ (function () {
+                function Canvas() {
+                }
+                Canvas.prototype.mouseDown = function () {
+                    return this.currentTool.mouseDown();
+                };
+                Canvas.prototype.mouseUp = function () {
+                    return this.currentTool.mouseUp();
+                };
+                Canvas.prototype.getCurrentTool = function () {
+                    return this.currentTool;
+                };
+                Canvas.prototype.setCurrentTool = function (currentTool) {
+                    this.currentTool = currentTool;
+                };
+                return Canvas;
+            }());
+            var PaintTool = /** @class */ (function () {
+                function PaintTool() {
+                }
+                PaintTool.prototype.mouseDown = function () {
+                    console.log("mouseDown on PaintTool");
+                    return "mouseDown on PaintTool";
+                };
+                PaintTool.prototype.mouseUp = function () {
+                    console.log("mouseUp on PaintTool");
+                    return "mouseUp on PaintTool";
+                };
+                return PaintTool;
+            }());
+            var EraserTool = /** @class */ (function () {
+                function EraserTool() {
+                }
+                EraserTool.prototype.mouseDown = function () {
+                    console.log("mouseDown on EraserTool");
+                    return "mouseDown on EraserTool";
+                };
+                EraserTool.prototype.mouseUp = function () {
+                    console.log("mouseUp on EraserTool");
+                    return "mouseUp on EraserTool";
+                };
+                return EraserTool;
+            }());
+            var PencilTool = /** @class */ (function () {
+                function PencilTool() {
+                }
+                PencilTool.prototype.mouseDown = function () {
+                    console.log("mouseDown on PencilTool");
+                    return "mouseDown on PencilTool";
+                };
+                PencilTool.prototype.mouseUp = function () {
+                    console.log("mouseUp on PencilTool");
+                    return "mouseUp on PencilTool";
+                };
+                return PencilTool;
+            }());
+            var StatePattern2 = exports('app_state2', /** @class */ (function () {
+                function class_1(hostRef) {
+                    registerInstance(this, hostRef);
+                    this.canvas = new Canvas;
+                }
+                class_1.prototype.render = function () {
+                    var _this = this;
+                    return (h("div", { class: "margin20" }, h("h3", null, "State Pattern"), h("h5", null, "Select tool"), h("button", { class: "btn-large", onClick: function () { return _this.setPaintTool(); } }, "Paint Tool"), h("button", { class: "btn-large", onClick: function () { return _this.setEraserTool(); } }, "Eraser Tool"), h("button", { class: "btn-large", onClick: function () { return _this.setPencilTool(); } }, "Pencil Tool"), h("h5", null, "Draw in the canvas"), h("div", { ref: function (el) { return _this.stateCanvas = el; }, id: "stateCanvas", onMouseDown: function (_) { return _this.onMouseDown(); }, onMouseUp: function (_) { return _this.onMouseUp(); } }, "Canvas"), h("h5", null, "What's going on in the canvas"), h("div", { ref: function (el) { return _this.result = el; } })));
+                };
+                class_1.prototype.setPaintTool = function () { this.canvas.setCurrentTool(new PaintTool); };
+                class_1.prototype.setEraserTool = function () { this.canvas.setCurrentTool(new EraserTool); };
+                class_1.prototype.setPencilTool = function () { this.canvas.setCurrentTool(new PencilTool); };
+                class_1.prototype.onMouseDown = function () {
+                    var tool = this.canvas.getCurrentTool();
+                    if (tool) {
+                        var result = this.canvas.mouseDown();
+                        this.result.innerHTML = result;
+                    }
+                    else {
+                        alert("Please select tool.");
+                    }
+                };
+                class_1.prototype.onMouseUp = function () {
+                    var tool = this.canvas.getCurrentTool();
+                    if (tool) {
+                        var result = this.canvas.mouseUp();
+                        this.result.innerHTML = result;
+                    }
+                };
+                Object.defineProperty(class_1, "style", {
+                    get: function () { return "STYLE_TEXT_PLACEHOLDER:app-state2"; },
+                    enumerable: true,
+                    configurable: true
+                });
+                return class_1;
+            }()));
+        }
+    };
+});

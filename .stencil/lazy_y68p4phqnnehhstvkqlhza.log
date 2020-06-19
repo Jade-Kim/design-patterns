@@ -1,0 +1,30 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { Host, h } from "@stencil/core";
+import { Package } from '../../global/Strategy/Package';
+import { Shipping } from '../../global/Strategy/Shipping';
+import { Fedex, UPS, USPS } from '../../global/Strategy/Companies';
+export const Strategy = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h(Host, null, h("slot", null, h("button", { onClick: _ => this.calculate() }, "CALCULATE SHIPPING COST"), h("div", { ref: el => this.result = el }))));
+    }
+    calculate() {
+        const fedex = new Fedex();
+        const ups = new UPS();
+        const usps = new USPS();
+        const thePackage = new Package("Colorado", "Texas", 1.56);
+        // fedex.calculate(thePackage);
+        // ups.calculate(thePackage);
+        // usps.calculate(thePackage);
+        const shipping = new Shipping();
+        shipping.setStrategy(fedex);
+        this.result.innerHTML += "Fedex: " + shipping.calculate(thePackage) + "<br/>";
+        shipping.setStrategy(ups);
+        this.result.innerHTML += "UPS: " + shipping.calculate(thePackage) + "<br/>";
+        shipping.setStrategy(usps);
+        this.result.innerHTML += "USPS: " + shipping.calculate(thePackage) + "<br/>";
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-strategy"; }
+};

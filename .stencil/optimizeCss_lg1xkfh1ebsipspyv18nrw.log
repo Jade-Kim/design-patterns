@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+
+#mementoNote {
+  border: 1px silver solid;
+  border-radius: 5px;
+  width: 100%;
+  height: 100px;
+}

@@ -1,0 +1,66 @@
+System.register(['./p-70e1058c.system.js'], function (exports) {
+    'use strict';
+    var registerInstance, h, Host;
+    return {
+        setters: [function (module) {
+                registerInstance = module.r;
+                h = module.h;
+                Host = module.H;
+            }],
+        execute: function () {
+            var Member = /** @class */ (function () {
+                function Member(name) {
+                    this.chatroom = null;
+                    this.name = name;
+                }
+                //message: string;
+                Member.prototype.send = function (message, toMember) {
+                    this.chatroom.send(message, this, toMember);
+                };
+                Member.prototype.receive = function (message, fromMember) {
+                    console.log(fromMember.name + " to " + this.name + ": " + message);
+                    //this.message = fromMember.name+" to "+this.name+": "+message;
+                };
+                return Member;
+            }());
+            var ChatroomMediator = /** @class */ (function () {
+                function ChatroomMediator() {
+                    this.members = {};
+                }
+                ChatroomMediator.prototype.addMember = function (member) {
+                    this.members[member.name] = member;
+                    member.chatroom = this;
+                };
+                ChatroomMediator.prototype.send = function (message, fromMember, toMember) {
+                    toMember.receive(message, fromMember);
+                };
+                return ChatroomMediator;
+            }());
+            var Mediator = exports('app_mediator', /** @class */ (function () {
+                function class_1(hostRef) {
+                    registerInstance(this, hostRef);
+                    this.chat = new ChatroomMediator();
+                    this.jade = new Member("Jade");
+                    this.frank = new Member("Frank");
+                }
+                class_1.prototype.render = function () {
+                    var _this = this;
+                    return (h(Host, null, h("slot", null, h("h5", null, "Chatroom #1"), h("input", { type: "text", placeholder: "Jade's Message to Frank", ref: function (el) { return _this.messageToFrank = el; } }), h("button", { onClick: function (_) { return _this.sendMessage(); } }, "SEND"), h("p", null, this.message))));
+                };
+                class_1.prototype.componentDidLoad = function () {
+                    this.chat.addMember(this.jade);
+                    this.chat.addMember(this.frank);
+                };
+                class_1.prototype.sendMessage = function () {
+                    this.jade.send(this.messageToFrank.value, this.frank);
+                };
+                Object.defineProperty(class_1, "style", {
+                    get: function () { return "STYLE_TEXT_PLACEHOLDER:app-mediator"; },
+                    enumerable: true,
+                    configurable: true
+                });
+                return class_1;
+            }()));
+        }
+    };
+});

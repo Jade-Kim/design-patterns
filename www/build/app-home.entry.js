@@ -1,0 +1,13 @@
+import { r as registerInstance, h } from './core-51b172a0.js';
+
+const AppHome = class {
+    constructor(hostRef) {
+        registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("div", { class: 'app-home', id: "home" }, h("div", { class: "row" }, h("div", { class: "col s4" }, h("h4", null, "Creational"), h("a", { class: "btn waves-effect waves-light cyan", href: "/factory" }, "Factory"), h("a", { class: "btn waves-effect waves-light cyan", href: "/singleton" }, "Singleton")), h("div", { class: "col s4" }, h("h4", null, "Structural"), h("a", { class: "btn waves-effect waves-light blue", href: "/adapter" }, "Adapter"), h("a", { class: "btn waves-effect waves-light blue", href: "/bridge" }, "Bridge"), h("a", { class: "btn waves-effect waves-light blue", href: "/composite" }, "Composite"), h("a", { class: "btn waves-effect waves-light blue", href: "/decorator" }, "Decorator"), h("a", { class: "btn waves-effect waves-light blue", href: "/facade" }, "Facade"), h("a", { class: "btn waves-effect waves-light blue", href: "/flyweight" }, "Flyweight"), h("a", { class: "btn waves-effect waves-light blue", href: "/proxy" }, "Proxy")), h("div", { class: "col s4" }, h("h4", null, "Behavioral"), h("a", { class: "btn waves-effect waves-light", href: "/memento" }, "Memento"), h("a", { class: "btn waves-effect waves-light", href: "/command" }, "Command"), h("a", { class: "btn waves-effect waves-light", href: "/state" }, "State"), h("a", { class: "btn waves-effect waves-light", href: "/strategy" }, "Strategy"), h("a", { class: "btn waves-effect waves-light", href: "/template" }, "Template"), h("a", { class: "btn waves-effect waves-light", href: "/iterator" }, "Iterator"), h("a", { class: "btn waves-effect waves-light", href: "/observer" }, "Observer"), h("a", { class: "btn waves-effect waves-light", href: "/chain" }, "Chain of Responsibility")))));
+    }
+    static get style() { return ".app-home {\n  padding: 10px;\n}\n\n.app-home a {\n  display: block;\n  /* width: fit-content; */\n  margin: 10px auto;\n}\n\n.app-home .row {\n  text-align: center;\n}\n/* \nbutton {\n  background: #5851ff;\n  color: white;\n  margin: 8px;\n  border: none;\n  font-size: 13px;\n  font-weight: 700;\n  text-transform: uppercase;\n  padding: 16px 20px;\n  border-radius: 2px;\n  box-shadow: 0 8px 16px rgba(0,0,0,.1), 0 3px 6px rgba(0,0,0,.08);\n  outline: 0;\n  letter-spacing: .04em;\n  transition: all .15s ease;\n  cursor: pointer;\n}\n  \nbutton:hover {\n  box-shadow: 0 3px 6px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.1);\n  transform: translateY(1px);\n}\n\n.box1 {\n  background-color: rgb(47, 222, 206);\n  height: 50px;\n  width: 50px;\n} */"; }
+};
+
+export { AppHome as app_home };

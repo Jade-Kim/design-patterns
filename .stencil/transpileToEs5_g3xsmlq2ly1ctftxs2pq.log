@@ -1,0 +1,171 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+System.register(['./p-70e1058c.system.js'], function (exports) {
+    'use strict';
+    var registerInstance, h;
+    return {
+        setters: [function (module) {
+                registerInstance = module.r;
+                h = module.h;
+            }],
+        execute: function () {
+            var Task = /** @class */ (function () {
+                function Task(user) {
+                    this.user = user;
+                }
+                Task.prototype.execute = function () {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var res, _a_1;
+                        return __generator(this, function (_b) {
+                            switch (_b.label) {
+                                case 0:
+                                    _b.trys.push([0, 2, , 3]);
+                                    return [4 /*yield*/, this.user.validate(this.user)];
+                                case 1:
+                                    res = _b.sent();
+                                    if (res) {
+                                        this.beforeSave();
+                                        this.save();
+                                        this.afterSave();
+                                    }
+                                    else {
+                                        console.log("user validate failed.");
+                                    }
+                                    return [3 /*break*/, 3];
+                                case 2:
+                                    _a_1 = _b.sent();
+                                    console.log("user validate failed.");
+                                    return [2 /*return*/, false];
+                                case 3: return [2 /*return*/];
+                            }
+                        });
+                    });
+                };
+                return Task;
+            }());
+            var SaveUserInfo = /** @class */ (function (_super) {
+                __extends(SaveUserInfo, _super);
+                function SaveUserInfo() {
+                    return _super !== null && _super.apply(this, arguments) || this;
+                }
+                SaveUserInfo.prototype.beforeSave = function () {
+                    alert("Some Logic here Before Save User Info");
+                };
+                SaveUserInfo.prototype.save = function () {
+                    alert("User Info Saved!");
+                };
+                SaveUserInfo.prototype.afterSave = function () {
+                    alert("Some Logic here After Save User Info");
+                };
+                return SaveUserInfo;
+            }(Task));
+            var SaveBlogPost = /** @class */ (function (_super) {
+                __extends(SaveBlogPost, _super);
+                function SaveBlogPost(user, content) {
+                    var _this = _super.call(this, user) || this;
+                    _this.content = content;
+                    return _this;
+                }
+                SaveBlogPost.prototype.beforeSave = function () {
+                    alert("Some Logic here Before Save Blog Post");
+                };
+                SaveBlogPost.prototype.save = function () {
+                    alert("Blog Post Saved! Content: " + this.content);
+                };
+                SaveBlogPost.prototype.afterSave = function () {
+                    alert("Some Logic here After Save Blog Post");
+                };
+                return SaveBlogPost;
+            }(Task));
+            var User = /** @class */ (function () {
+                function User(username, pw) {
+                    this.username = username;
+                    this.pw = pw;
+                }
+                User.prototype.validate = function (user) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        return __generator(this, function (_b) {
+                            console.log(user);
+                            // user validation logic here
+                            alert("validated user!");
+                            return [2 /*return*/, true];
+                        });
+                    });
+                };
+                return User;
+            }());
+            var Template = exports('app_template', /** @class */ (function () {
+                function class_1(hostRef) {
+                    registerInstance(this, hostRef);
+                }
+                class_1.prototype.render = function () {
+                    var _this = this;
+                    return (h("div", { class: "margin20" }, h("h3", null, "Template Method Pattern"), h("h6", { class: "grayHint" }, "- Abstract Class draws a blueprint of how the class will be structured. The template method will be implemented for every concrete classes and primitive operation 1 & 2 are abstract methods called hooks. The concrete sub classes will be inherited from abstract class and should implement the hooks."), h("h6", { class: "grayHint" }, "- \uD15C\uD50C\uB9BF \uBA54\uC18C\uB4DC\uB294 \uD074\uB798\uC2A4\uC758 Structure, \uD070 \uADF8\uB9BC\uC744 \uBBF8\uB9AC \uADF8\uB824\uB193\uACE0 \uC138\uBD80 \uC0AC\uD56D Hooks \uC740 Sub-class \uC5D0\uC11C \uC2E4\uC81C\uB85C \uC2E4\uD589\uB420 \uC218 \uC788\uB3C4\uB85D \uD55C\uB2E4. \uD504\uB808\uC784\uC6CC\uD06C\uB97C \uC9E4 \uB54C \uB9CE\uC774 \uC0AC\uC6A9\uB418\uB294 \uD328\uD134.", h("br", null), "\uD56D\uC0C1 \uAC19\uC740 \uB0B4\uC6A9\uC744 \uC2E4\uD589\uD558\uB294 \uBA54\uC18C\uB4DC\uC640 \uC0C1\uD669\uC5D0 \uB530\uB77C(\uC720\uC800\uC5D0 \uB530\uB77C) \uC870\uAE08 \uB2E4\uB978 \uB0B4\uC6A9\uC744 \uC2E4\uD589\uD558\uB294 \uBA54\uC18C\uB4DC\uB97C \uAC00\uC9C0\uACE0 \uC788\uB2E4."), h("br", null), h("input", { type: "text", ref: function (el) { return _this.username = el; }, placeholder: "user name" }), h("input", { type: "text", ref: function (el) { return _this.pw = el; }, placeholder: "password" }), h("input", { type: "text", ref: function (el) { return _this.blog = el; }, placeholder: "blog post content" }), h("button", { class: "btn margin20", onClick: function (_) { return _this.saveUserInfo(); } }, "Save User Info"), h("button", { class: "btn margin20", onClick: function (_) { return _this.saveBlogPost(); } }, "Save Blog Info"), h("pattern-photos", { uml: "templateMethod-uml.png", imp: "templateMethod-i.png", cl: "templateMethod-1.png", cl2: "templateMethod-2.png" })));
+                };
+                class_1.prototype.saveUserInfo = function () {
+                    var user = new User(this.username.value, this.pw.value);
+                    var task = new SaveUserInfo(user);
+                    task.execute();
+                };
+                class_1.prototype.saveBlogPost = function () {
+                    var user = new User(this.username.value, this.pw.value);
+                    var task = new SaveBlogPost(user, this.blog.value);
+                    task.execute();
+                };
+                Object.defineProperty(class_1, "style", {
+                    get: function () { return "STYLE_TEXT_PLACEHOLDER:app-template"; },
+                    enumerable: true,
+                    configurable: true
+                });
+                return class_1;
+            }()));
+        }
+    };
+});

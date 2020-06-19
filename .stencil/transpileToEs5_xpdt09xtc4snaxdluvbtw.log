@@ -1,0 +1,138 @@
+System.register(['./p-70e1058c.system.js'], function (exports) {
+    'use strict';
+    var registerInstance, h;
+    return {
+        setters: [function (module) {
+                registerInstance = module.r;
+                h = module.h;
+            }],
+        execute: function () {
+            var MusicPlayer = /** @class */ (function () {
+                function MusicPlayer() {
+                }
+                MusicPlayer.prototype.pressedPower = function () {
+                    this.currentState.pressedPower();
+                };
+                MusicPlayer.prototype.pressedPlay = function () {
+                    this.currentState.pressedPlay();
+                };
+                MusicPlayer.prototype.pressedPause = function () {
+                    this.currentState.pressedPause();
+                };
+                Object.defineProperty(MusicPlayer.prototype, "getState", {
+                    get: function () {
+                        return this.currentState;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MusicPlayer.prototype, "setState", {
+                    set: function (state) {
+                        this.currentState = state;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                return MusicPlayer;
+            }());
+            var PowerOn = /** @class */ (function () {
+                function PowerOn() {
+                }
+                PowerOn.prototype.pressedPower = function () {
+                    return false;
+                };
+                PowerOn.prototype.pressedPlay = function () {
+                    return "Playing...";
+                };
+                PowerOn.prototype.pressedPause = function () {
+                    return "Pause!";
+                };
+                return PowerOn;
+            }());
+            var PowerOff = /** @class */ (function () {
+                function PowerOff() {
+                }
+                PowerOff.prototype.pressedPower = function () {
+                    return true;
+                };
+                PowerOff.prototype.pressedPlay = function () {
+                    return "";
+                };
+                PowerOff.prototype.pressedPause = function () {
+                    return "";
+                };
+                return PowerOff;
+            }());
+            var Playing = /** @class */ (function () {
+                function Playing() {
+                }
+                Playing.prototype.pressedPower = function () {
+                    return false;
+                };
+                Playing.prototype.pressedPlay = function () {
+                    return "Playing...";
+                };
+                Playing.prototype.pressedPause = function () {
+                    return "Pause!";
+                };
+                return Playing;
+            }());
+            var Paused = /** @class */ (function () {
+                function Paused() {
+                }
+                Paused.prototype.pressedPower = function () {
+                    return false;
+                };
+                Paused.prototype.pressedPlay = function () {
+                    return "Playing...";
+                };
+                Paused.prototype.pressedPause = function () {
+                    return "Pause!";
+                };
+                return Paused;
+            }());
+            var StatePattern = exports('app_state', /** @class */ (function () {
+                function class_1(hostRef) {
+                    registerInstance(this, hostRef);
+                    this.musicPlayer = new MusicPlayer();
+                }
+                class_1.prototype.render = function () {
+                    var _this = this;
+                    return (h("div", { class: "margin20" }, h("h3", null, "State Pattern"), h("h6", { class: "grayHint" }, "- Lets an object to behave differently depending on the state now"), h("h6", { class: "grayHint" }, "- \uD604\uC7AC \uC0C1\uD0DC\uC5D0 \uB530\uB77C \uAC19\uC740 \uC774\uB984\uC758 \uBA54\uC18C\uB4DC\uAC00 \uB2E4\uB974\uAC8C \uC791\uB3D9\uD558\uBA70 Context \uB294 \uD558\uB098\uC758 State, \uC989 \uD558\uB098\uC758 current State \uB97C \uAC00\uC9C8 \uC218 \uC788\uB2E4."), h("br", null), h("h5", null, "Music Player"), h("h6", { class: "grayHint" }, "- Music Player Buttons behave differently depends on the current state of the music player."), h("h6", { class: "grayHint" }, "- \uC74C\uC545 \uD50C\uB808\uC774\uC5B4\uC758 \uC0C1\uD0DC\uC5D0 \uB530\uB77C \uC544\uB798 \uBC84\uD2BC\uC740 \uAC01\uAC01 \uB2E4\uB974\uAC8C \uC791\uB3D9\uD55C\uB2E4."), h("h6", { class: "blueHint" }, "- Music Player Current State: ", this.currentState), h("button", { class: this.powerOn ? "btn-large margin20" : "btn-large margin20 red", onClick: function () { return _this.pressedPower(); } }, h("i", { class: "material-icons" }, "power_settings_new")), h("button", { class: "btn-large margin20", onClick: function () { return _this.pressedPlay(); } }, h("i", { class: "material-icons" }, "play_arrow")), h("button", { class: "btn-large margin20", onClick: function () { return _this.pressedPause(); } }, h("i", { class: "material-icons" }, "pause")), h("pattern-photos", { uml: "state-uml.png", imp: "state-i.png", cl: "state-1.png", cl2: "state-2.png" })));
+                };
+                class_1.prototype.pressedPower = function () {
+                    var state = this.musicPlayer.getState;
+                    this.powerOn = state.pressedPower();
+                    if (this.powerOn) {
+                        this.musicPlayer.setState = new PowerOn();
+                        this.currentState = "Power On";
+                    }
+                    else {
+                        this.musicPlayer.setState = new PowerOff();
+                        this.currentState = "Power Off";
+                    }
+                };
+                class_1.prototype.pressedPlay = function () {
+                    var state = this.musicPlayer.getState;
+                    this.currentState = state.pressedPlay();
+                    this.powerOn ? this.musicPlayer.setState = new Playing() : '';
+                };
+                class_1.prototype.pressedPause = function () {
+                    var state = this.musicPlayer.getState;
+                    this.currentState = state.pressedPause();
+                    this.powerOn ? this.musicPlayer.setState = new Paused() : '';
+                };
+                class_1.prototype.componentDidLoad = function () {
+                    this.musicPlayer.setState = new PowerOff();
+                    this.currentState = "Power Off";
+                };
+                Object.defineProperty(class_1, "style", {
+                    get: function () { return "STYLE_TEXT_PLACEHOLDER:app-state"; },
+                    enumerable: true,
+                    configurable: true
+                });
+                return class_1;
+            }()));
+        }
+    };
+});

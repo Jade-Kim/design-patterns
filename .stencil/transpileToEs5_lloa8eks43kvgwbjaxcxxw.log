@@ -1,0 +1,129 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+System.register(['./p-70e1058c.system.js'], function (exports) {
+    'use strict';
+    var registerInstance, h;
+    return {
+        setters: [function (module) {
+                registerInstance = module.r;
+                h = module.h;
+            }],
+        execute: function () {
+            // Concrete Observer
+            var RFIDPluginObserver = /** @class */ (function () {
+                function RFIDPluginObserver(rfidPlugin) {
+                    this.rfidPlugin = rfidPlugin;
+                    this._notifier = [];
+                }
+                RFIDPluginObserver.prototype.update = function () {
+                    var _this = this;
+                    this._notifier.forEach(function (fn) { fn(_this.rfidPlugin.data); });
+                    console.log(this);
+                };
+                RFIDPluginObserver.prototype.listener = function (fn) {
+                    this._notifier.push(fn);
+                };
+                return RFIDPluginObserver;
+            }());
+            var ObservableObject = /** @class */ (function () {
+                function ObservableObject() {
+                    this.observers = [];
+                }
+                // subscribe
+                ObservableObject.prototype.addObserver = function (observer) {
+                    var isExist = this.observers.indexOf(observer);
+                    if (isExist !== -1) {
+                        return console.log('Subject: Observer has been attached already.');
+                    }
+                    this.observers.push(observer);
+                };
+                // unsubscribe
+                ObservableObject.prototype.removeObserver = function (observer) {
+                    var i = this.observers.indexOf(observer);
+                    if (i === -1) {
+                        return console.log('Observer dose not exist.');
+                    }
+                    this.observers.splice(i, 1);
+                };
+                ObservableObject.prototype.notifyObservers = function () {
+                    for (var _i = 0, _a = this.observers; _i < _a.length; _i++) {
+                        var observer = _a[_i];
+                        observer.update();
+                    }
+                };
+                return ObservableObject;
+            }());
+            var RFIDPlugin = /** @class */ (function (_super) {
+                __extends(RFIDPlugin, _super);
+                function RFIDPlugin() {
+                    return _super !== null && _super.apply(this, arguments) || this;
+                }
+                Object.defineProperty(RFIDPlugin.prototype, "data", {
+                    get: function () {
+                        return this.currentData;
+                    },
+                    set: function (data) {
+                        this.currentData = data;
+                        this.notifyObservers();
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                return RFIDPlugin;
+            }(ObservableObject));
+            var rfidPlugin = new RFIDPlugin();
+            var rfidPluginObserver = new RFIDPluginObserver(rfidPlugin);
+            function checkRfidPlugin() {
+                // ... check the connection
+                var connectionStatus = "Connected!";
+                rfidPlugin.data = connectionStatus;
+            }
+            var Observer = exports('app_observer', /** @class */ (function () {
+                function class_1(hostRef) {
+                    registerInstance(this, hostRef);
+                }
+                class_1.prototype.render = function () {
+                    var _this = this;
+                    return (h("div", { class: "margin20" }, h("h3", null, "Observer Pattern"), h("h6", { class: "grayHint" }, "- Allows a subscription mechanism to notify other objects when any events happen."), h("h6", { class: "grayHint" }, "- \uC774\uBCA4\uD2B8\uAC00 \uC0DD\uAE30\uBA74 \uD574\uB2F9 \uC774\uBCA4\uD2B8\uB97C \uAD6C\uB3C5\uD558\uACE0 \uC788\uB294 \uB2E4\uB978 \uAC1D\uCCB4\uC5D0\uAC8C \uC54C\uB824\uC8FC\uB294 \uC124\uACC4 \uD328\uD134\uC774\uB2E4."), h("h5", null, "Handle a plugin connection"), h("button", { class: "btn margin20", onClick: function (_) { return _this.connect(); } }, "Connect"), h("button", { class: "btn margin20", onClick: function (_) { return _this.disconnect(); } }, "Disconnect"), h("div", null, this.result_plugin)));
+                };
+                class_1.prototype.componentWillLoad = function () {
+                    var _this = this;
+                    rfidPluginObserver.listener(function (connection) { return _this.result_plugin = connection; });
+                    // pluginConnection.listener(
+                    //   (connection) => this.result_plugin = connection
+                    // )
+                };
+                class_1.prototype.componentDidLoad = function () {
+                    rfidPlugin.addObserver(rfidPluginObserver);
+                    checkRfidPlugin();
+                    //checkConnection();
+                };
+                class_1.prototype.connect = function () {
+                    rfidPlugin.data = "Connected";
+                    //pluginConnection.fire("Connected");
+                };
+                class_1.prototype.disconnect = function () {
+                    rfidPlugin.data = "Disconnected";
+                    //pluginConnection.fire("Disconnected");
+                };
+                Object.defineProperty(class_1, "style", {
+                    get: function () { return "STYLE_TEXT_PLACEHOLDER:app-observer"; },
+                    enumerable: true,
+                    configurable: true
+                });
+                return class_1;
+            }()));
+        }
+    };
+});

@@ -1,0 +1,9 @@
+.btnDiv button {
+  display: block;
+  margin: 10px;
+}
+
+.resultDiv {
+  background-color: powderblue;
+  padding: 10px;
+}

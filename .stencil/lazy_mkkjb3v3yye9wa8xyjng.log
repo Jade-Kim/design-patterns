@@ -1,0 +1,15 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { checkConnection } from '../../global/Observer/ObserverPattern';
+export const AppRoot = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("div", null, h("header", null, h("a", { href: "/", class: "btn-floating grey", id: "backBtn" }, h("i", { class: "material-icons" }, "home")), h("h1", null, "Jade's Design Patterns")), h("app-memento", null), h("main", null, h("stencil-router", null, h("stencil-route-switch", { scrollTopOffset: 0 }, h("stencil-route", { url: '/', component: 'app-home', exact: true }), h("stencil-route", { url: '/memento', component: 'app-memento' }), h("stencil-route", { url: '/state', component: 'app-state' }), h("stencil-route", { url: '/factory', component: 'app-factory' }), h("stencil-route", { url: '/strategy', component: 'app-strategy' }), h("stencil-route", { url: '/iterator', component: 'app-iterator' }), h("stencil-route", { url: '/observer', component: 'app-observer' }), h("stencil-route", { url: '/mediator', component: 'app-mediator' }), h("stencil-route", { url: '/singleton', component: 'app-singleton' }), h("stencil-route", { url: '/template', component: 'app-template' }), h("stencil-route", { url: '/command', component: 'app-command' }))))));
+    }
+    componentDidLoad() {
+        checkConnection();
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-root"; }
+};

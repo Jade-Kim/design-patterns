@@ -1,0 +1,16 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { TransferMoney } from '../../global/Template/concreteClass';
+export const Template = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.task = new TransferMoney();
+    }
+    render() {
+        return (h("div", { class: "margin20" }));
+    }
+    componentDidLoad() {
+        this.task.execute();
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-template"; }
+};

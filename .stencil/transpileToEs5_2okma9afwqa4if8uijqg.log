@@ -1,0 +1,79 @@
+System.register(['./p-70e1058c.system.js'], function (exports) {
+    'use strict';
+    var registerInstance, h;
+    return {
+        setters: [function (module) {
+                registerInstance = module.r;
+                h = module.h;
+            }],
+        execute: function () {
+            // Concrete Component
+            var CloudStorage = /** @class */ (function () {
+                function CloudStorage() {
+                }
+                CloudStorage.prototype.store = function (data) {
+                    alert("Storing " + data);
+                };
+                return CloudStorage;
+            }());
+            // Decorator
+            var Encrypted = /** @class */ (function () {
+                function Encrypted(storage) {
+                    this.storage = storage;
+                }
+                Encrypted.prototype.store = function (data) {
+                    var encrypted = this.encrypt(data);
+                    this.storage.store(encrypted);
+                };
+                Encrypted.prototype.encrypt = function (data) {
+                    return "encrypted " + data;
+                };
+                return Encrypted;
+            }());
+            var Compressed = /** @class */ (function () {
+                function Compressed(storage) {
+                    this.storage = storage;
+                }
+                Compressed.prototype.store = function (data) {
+                    var compressed = this.compress(data);
+                    this.storage.store(compressed);
+                };
+                Compressed.prototype.compress = function (data) {
+                    return "compressed " + data;
+                };
+                return Compressed;
+            }());
+            var Decorator = exports('app_decorator', /** @class */ (function () {
+                function class_1(hostRef) {
+                    registerInstance(this, hostRef);
+                }
+                class_1.prototype.render = function () {
+                    var _this = this;
+                    return (h("div", { class: "margin20" }, h("h3", null, "Decorator Pattern"), h("h6", { class: "grayHint" }, "- Attach additional behaviors to objects using ", h("span", { class: "blueHint" }, "wrapper (decorator)")), h("h6", { class: "grayHint" }, "- Wrapper (Decorator) \uC5D0 \uAE30\uB2A5\uC744 \uB2F4\uC544 \uAC1D\uCCB4\uC5D0 \uC6D0\uD558\uB294 \uCD94\uAC00 \uAE30\uB2A5\uC744 \uC720\uC5F0\uD558\uAC8C \uB123\uC744 \uC218 \uC788\uB294 \uC124\uACC4 \uD328\uD134\uC774\uB2E4."), h("input", { placeholder: "Type something here and save data.", ref: function (el) { return _this.userInput = el; } }), h("button", { class: "waves-effect waves-light btn-large margin20", onClick: function () { return _this.save(); } }, "Save Data"), h("button", { class: "waves-effect waves-light btn-large margin20", onClick: function () { return _this.saveEncrypted(); } }, "Save Encrypted Data"), h("button", { class: "waves-effect waves-light btn-large margin20", onClick: function () { return _this.saveCompressed(); } }, "Save Compressed Data"), h("button", { class: "waves-effect waves-light btn-large margin20", onClick: function () { return _this.saveCompressedEncrypted(); } }, "Save Compressed and Encrypted Data"), h("pattern-photos", { uml: "decorator-uml.png", imp: "decorator-i.png", cl: "decorator.png" })));
+                };
+                class_1.prototype.save = function () {
+                    var cloudStream = new CloudStorage();
+                    cloudStream.store(this.userInput.value);
+                };
+                class_1.prototype.saveEncrypted = function () {
+                    var cloudStream = new Encrypted(new CloudStorage());
+                    cloudStream.store(this.userInput.value);
+                };
+                class_1.prototype.saveCompressed = function () {
+                    var cloudStream = new Compressed(new CloudStorage());
+                    cloudStream.store(this.userInput.value);
+                };
+                class_1.prototype.saveCompressedEncrypted = function () {
+                    var cloudStream = new Compressed(new Encrypted(new CloudStorage()));
+                    cloudStream.store(this.userInput.value);
+                };
+                Object.defineProperty(class_1, "style", {
+                    get: function () { return "STYLE_TEXT_PLACEHOLDER:app-decorator"; },
+                    enumerable: true,
+                    configurable: true
+                });
+                return class_1;
+            }()));
+        }
+    };
+});

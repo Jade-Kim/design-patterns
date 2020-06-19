@@ -1,0 +1,37 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { Editor } from '../../global/Memento/Editor';
+import { EditorHistory } from '../../global/Memento/EditorHistory';
+import { rfidPlugin, RFIDPluginObserver } from '../../global/Observer/Observer';
+export const MementoPattern = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.editor = new Editor();
+        this.history = new EditorHistory();
+        this.pluginObserver = new RFIDPluginObserver(rfidPlugin);
+    }
+    render() {
+        return (h("div", { class: "margin20" }, h("h3", null, "Memento Pattern"), rfidPlugin.data, h("h6", { class: "grayHint" }, "- Memento Pattern implements ", h("span", { class: "blueHint" }, "'undo'"), " mechanisms."), h("h6", { class: "grayHint" }, "- \uBA54\uBA58\uD1A0 \uD398\uD134\uC740 ", h("span", { class: "blueHint" }, "'\uC2E4\uD589 \uCDE8\uC18C'"), " \uBA54\uCEE4\uB2C8\uC998\uC744 \uC2E4\uD589\uD569\uB2C8\uB2E4."), h("input", { placeholder: "Type something here and set content several times then click undo button.", ref: el => this.userInput = el }), h("button", { class: "waves-effect waves-light btn-large margin20", onClick: () => this.setContent() }, "Set Content"), h("button", { class: "waves-effect waves-light btn-large pink", onClick: () => this.undo() }, "Undo"), h("div", { id: "mementoNote", ref: el => this.editorResult = el, class: "resultDiv" }), h("pattern-photos", { uml: "memento-uml.png", imp: "memento-i.png", cl: "memento.png" })));
+    }
+    setContent() {
+        const state = this.editor.createState();
+        this.history.push(state);
+        this.editor.setContent = this.userInput.value;
+        console.log(this.history);
+        this.editorResult.innerHTML = this.userInput.value;
+        this.userInput.value = "";
+    }
+    undo() {
+        console.log(this.history.pop());
+        debugger;
+        this.editor.restore(this.history.pop());
+        const previousContent = this.editor.getContent;
+        !previousContent
+            ? this.editorResult.innerHTML = ""
+            : this.editorResult.innerHTML = previousContent;
+    }
+    componentWillLoad() {
+        rfidPlugin.addObserver(this.pluginObserver);
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-memento"; }
+};

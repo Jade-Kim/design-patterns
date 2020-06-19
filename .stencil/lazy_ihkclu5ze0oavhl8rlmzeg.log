@@ -1,0 +1,23 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { Host, h } from "@stencil/core";
+import { ChatroomMediator, Member } from '../../global/Mediator/MediatorPattern';
+export const Mediator = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.chat = new ChatroomMediator();
+        this.jade = new Member("Jade");
+        this.frank = new Member("Frank");
+    }
+    render() {
+        return (h(Host, null, h("slot", null, h("h5", null, "Chatroom #1"), h("input", { type: "text", placeholder: "Jade's Message to Frank", ref: el => this.messageToFrank = el }), h("button", { onClick: _ => this.sendMessage() }, "SEND"), h("p", null, this.message))));
+    }
+    componentDidLoad() {
+        this.chat.addMember(this.jade);
+        this.chat.addMember(this.frank);
+    }
+    sendMessage() {
+        this.jade.send(this.messageToFrank.value, this.frank);
+        this.message = this.jade.message;
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-mediator"; }
+};

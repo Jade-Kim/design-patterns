@@ -1,0 +1,22 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { Canvas } from '../../global/State/Canvas';
+import { PaintTool } from '../../global/State/PaintTool';
+import { EraserTool } from '../../global/State/EraserTool';
+export const State = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.canvas = new Canvas;
+        this.paintTool = new PaintTool;
+        this.eraserTool = new EraserTool;
+    }
+    render() {
+        return (h("div", null, h("h3", null, "State Pattern"), h("button", { class: "btn-large", onClick: (e) => this.setTool(e) }, "Paint Tool"), h("button", { class: "btn-large", onClick: (e) => this.setTool(e) }, "Eraser Tool")));
+    }
+    setTool(e) {
+        e;
+        debugger;
+        //this.canvas.setCurrentTool(this.paintTool);
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-state"; }
+};

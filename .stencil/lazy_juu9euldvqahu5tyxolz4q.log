@@ -1,0 +1,13 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+export const Proxy = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("div", { class: "margin20" }, h("h3", null, "Proxy Pattern"), h("h6", { class: "grayHint" }, "- Allows providing a substitue or placeholder for another object. The proxy object controls all the access of the original objects and allows you to add additional request either before or after of the original behavior"), h("h6", { class: "grayHint" }, "- \uD0C0\uAC9F \uAC1D\uCCB4\uB97C \uC9C1\uC811 \uC2E4\uD589\uD558\uAE30 \uC804\uC5D0 \uD504\uB85D\uC2DC \uAC1D\uCCB4\uAC00 \uD0C0\uAC9F \uAC1D\uCCB4\uC758 \uC694\uCCAD\uC744 \uAD00\uB9AC\uD55C\uB2E4. \uD0C0\uAC9F \uC694\uCCAD \uC804\uD6C4\uB85C \uCD94\uAC00\uC801\uC778 \uD568\uC218\uB97C \uC2E4\uD589\uD558\uB294 \uD328\uD134\uC744 \uB123\uC744 \uC218 \uC788\uB2E4."), h("button", { onClick: _ => this.draw() }, "Draw"), h("pattern-photos", { uml: "proxy-uml.png", imp: "proxy-i.png", cl: "proxy-1.png", cl2: "proxy-2.png" })));
+    }
+    draw() {
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-proxy"; }
+};

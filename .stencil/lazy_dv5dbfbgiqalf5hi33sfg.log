@@ -1,0 +1,94 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { UserDBService, ShoppingService, CanvasEditor } from '../../global/Command/Receiver';
+import { AddUserCommand, GetUserCommand, ShopSellCommand, ShopBuyCommand, SaveCartCommand, DrawCircleCommand, DrawLineCommand, PaintRedCommand, PaintBlueCommand } from '../../global/Command/ConcreteCommand';
+import { Button, Canvas2 } from '../../global/Command/Invoker';
+import { CreateTicketCommand, CreateAddressCommand, CloseTicketCommand } from '../../global/Command/Composite Command/CLCommands';
+import { CommandService } from '../../global/Command/Composite Command/CLCommandService';
+import { CommandManager } from '../../global/Command/Composite Command/CompositeCommand';
+export const Command = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.userDBService = new UserDBService(); // Receiver
+        this.shoppingService = new ShoppingService(); // Receiver
+        this.button = new Button(); // Invoker
+        this.canvasEditor = new CanvasEditor(); // Receiver
+        this.canvas = new Canvas2(); // Invoker
+        this.CLService = new CommandService(); // Receiver
+        this.CommandManager = new CommandManager(); // Invoker
+    }
+    render() {
+        return (h("div", { class: "margin20" }, h("h3", null, "Command Pattern"), h("h5", null, "Example 1) User DB Service & Shopping Service"), h("button", { class: "btn margin20", onClick: _ => this.addUser() }, "Add User"), h("button", { class: "btn margin20", onClick: _ => this.getUser() }, "Get User Info"), h("input", { ref: el => this.items = el, type: "text", placeholder: "Type items you need to sell/buy/save." }), h("button", { class: "btn margin20 cyan", onClick: _ => this.sell() }, "Sell"), h("button", { class: "btn margin20 cyan", onClick: _ => this.buy() }, "Buy"), h("button", { class: "btn margin20 cyan", onClick: _ => this.saveCart() }, "Save Cart"), h("h5", null, "Example 2) Canvas Editor - Undo Mechanism"), h("button", { class: "btn margin20 blue", onClick: _ => this.circle() }, "Draw a circle"), h("button", { class: "btn margin20 blue", onClick: _ => this.line() }, "Draw a line"), h("button", { class: "btn margin20 blue", onClick: _ => this.red() }, "Paint red"), h("button", { class: "btn margin20 blue", onClick: _ => this.blue() }, "Paint blue"), h("button", { class: "btn margin20 red", onClick: _ => this.undo() }, "Undo"), h("div", { class: "resultDiv margin20" }, h("h6", null, "** Canvas Editor History **"), this.canvasEditorHistory && this.canvasEditorHistory.length > 0 &&
+            this.canvasEditorHistory.map(cmd => h("p", null, cmd.operation))), h("h5", null, "Example 3) Add command and execute all commands at once"), h("button", { class: "btn margin20", onClick: _ => this.createTicket() }, "Create ticket"), h("button", { class: "btn margin20", onClick: _ => this.createAddress() }, "Create address"), h("button", { class: "btn margin20", onClick: _ => this.closeTicket() }, "Close ticket"), h("button", { class: "btn margin20 teal lighten-3", onClick: _ => this.executeAll() }, "Execute Commands")));
+    }
+    addUser() {
+        const command = new AddUserCommand(this.userDBService); // Concrete Command
+        this.button.executeCommand(command);
+        console.log(this.button.getCommands);
+    }
+    getUser() {
+        const command = new GetUserCommand(this.userDBService); // Concrete Command
+        this.button.executeCommand(command);
+        console.log(this.button.getCommands);
+    }
+    sell() {
+        const command = new ShopSellCommand(this.shoppingService); // Concrete Command
+        this.button.executeCommand(command, this.items.value);
+        console.log(this.button.getCommands);
+    }
+    buy() {
+        const command = new ShopBuyCommand(this.shoppingService); // Concrete Command
+        this.button.executeCommand(command, this.items.value);
+        console.log(this.button.getCommands);
+    }
+    saveCart() {
+        const command = new SaveCartCommand(this.shoppingService); // Concrete Command
+        this.button.executeCommand(command, this.items.value);
+        console.log(this.button.getCommands);
+    }
+    circle() {
+        const command = new DrawCircleCommand(this.canvasEditor);
+        this.canvas.executeCommand(command);
+        this.updateCanvasCommand();
+    }
+    line() {
+        const command = new DrawLineCommand(this.canvasEditor);
+        this.canvas.executeCommand(command);
+        this.updateCanvasCommand();
+    }
+    red() {
+        const command = new PaintRedCommand(this.canvasEditor);
+        this.canvas.executeCommand(command);
+        this.updateCanvasCommand();
+    }
+    blue() {
+        const command = new PaintBlueCommand(this.canvasEditor);
+        this.canvas.executeCommand(command);
+        this.updateCanvasCommand();
+    }
+    undo() {
+        this.canvas.pop();
+        this.updateCanvasCommand();
+    }
+    updateCanvasCommand() {
+        let cmds = JSON.stringify(this.canvas.getCommands);
+        cmds = JSON.parse(cmds);
+        this.canvasEditorHistory = cmds;
+    }
+    createTicket() {
+        const cmd = new CreateTicketCommand(this.CLService, { id: "ticket1" });
+        this.CommandManager.add(cmd);
+    }
+    closeTicket() {
+        const cmd = new CloseTicketCommand(this.CLService, { id: "ticket2" });
+        this.CommandManager.add(cmd);
+    }
+    createAddress() {
+        const cmd = new CreateAddressCommand(this.CLService, { id: "address1" });
+        this.CommandManager.add(cmd);
+    }
+    executeAll() {
+        this.CommandManager.executeCommand();
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-command"; }
+};

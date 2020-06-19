@@ -1,0 +1,51 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { ArrayIteratorHistory } from '../../global/Iterator/ArrayIteratorHistory';
+import { FixedArrayIteratorHistory } from '../../global/Iterator/FixedArrayIteratorHistory';
+export const Iterator = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.history = new ArrayIteratorHistory();
+        this.fixedHistory = new FixedArrayIteratorHistory();
+    }
+    render() {
+        return (h("div", { class: "margin20" }, h("h3", null, "Iterator Pattern"), h("h5", null, "Example 1) Array Iterator "), h("input", { type: "text", ref: el => this.userInput1 = el, placeholder: "Type here something to save on the history object." }), h("div", { class: "btnDiv" }, h("button", { class: "btn", onClick: _ => this.addToHistory() }, "Add to history"), h("button", { onClick: _ => this.iterate1ASC(), class: "btn blue" }, "ITERATE starting from the first element"), h("button", { onClick: _ => this.iterate1DESC(), class: "btn blue" }, "ITERATE starting from the last element")), h("h6", null, "Array Iterator History Result"), h("div", { ref: el => this.result1 = el }), h("hr", null), h("h5", null, "Example 2) Fixed Array Iterator: This history saves only the last 10 elements."), h("input", { type: "text", ref: el => this.userInput2 = el, placeholder: "Type here something to save on the history object." }), h("div", { class: "btnDiv" }, h("button", { class: "btn", onClick: _ => this.addToFixedHistory() }, "Add to fixed history"), h("button", { onClick: _ => this.iterate2ASC(), class: "btn blue lighten-1" }, "ITERATE starting from the first element"), h("button", { onClick: _ => this.iterate2DESC(), class: "btn blue lighten-1" }, "ITERATE starting from the last element")), h("h6", null, "Fixed Array Iterator History Result"), h("div", { ref: el => this.result2 = el })));
+    }
+    addToHistory() {
+        this.history.push(this.userInput1.value);
+        this.userInput1.value = "";
+    }
+    iterate1ASC() {
+        const iterator = this.history.createIterator();
+        while (iterator.hasNext()) {
+            this.result1.innerHTML += iterator.current() + "<br/>";
+            iterator.next();
+        }
+    }
+    iterate1DESC() {
+        const iterator = this.history.createIterator(1);
+        while (iterator.hasNext()) {
+            this.result1.innerHTML += iterator.current() + "<br/>";
+            iterator.next();
+        }
+    }
+    addToFixedHistory() {
+        this.fixedHistory.push(this.userInput2.value);
+        this.userInput2.value = "";
+    }
+    iterate2ASC() {
+        const iterator = this.fixedHistory.createIterator();
+        while (iterator.hasNext()) {
+            this.result2.innerHTML += iterator.current() + "<br/>";
+            iterator.next();
+        }
+    }
+    iterate2DESC() {
+        const iterator = this.fixedHistory.createIterator(1);
+        while (iterator.hasNext()) {
+            this.result2.innerHTML += iterator.current() + "<br/>";
+            iterator.next();
+        }
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-iterator"; }
+};

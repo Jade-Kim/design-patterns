@@ -1,0 +1,11 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+export const AppHome = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("div", { class: 'app-home', id: "home" }, h("div", { class: "row" }, h("div", { class: "col s4" }, h("h4", null, "Creational")), h("div", { class: "col s4" }, h("h4", null, "Structural"), h("a", { class: "btn waves-effect waves-light blue", href: "/adapter" }, "Adapter"), h("a", { class: "btn waves-effect waves-light blue", href: "/bridge" }, "Bridge"), h("a", { class: "btn waves-effect waves-light blue", href: "/composite" }, "Composite"), h("a", { class: "btn waves-effect waves-light blue", href: "/decorator" }, "Decorator"), h("a", { class: "btn waves-effect waves-light blue", href: "/facade" }, "Facade"), h("a", { class: "btn waves-effect waves-light blue", href: "/flyweight" }, "Flyweight"), h("a", { class: "btn waves-effect waves-light blue", href: "/proxy" }, "Proxy")), h("div", { class: "col s4" }, h("h4", null, "Behavioral"), h("a", { class: "btn waves-effect waves-light", href: "/memento" }, "Memento"), h("a", { class: "btn waves-effect waves-light", href: "/command" }, "Command"), h("a", { class: "btn waves-effect waves-light", href: "/state" }, "State"), h("a", { class: "btn waves-effect waves-light", href: "/strategy" }, "Strategy"), h("a", { class: "btn waves-effect waves-light", href: "/template" }, "Template"), h("a", { class: "btn waves-effect waves-light", href: "/iterator" }, "Iterator"), h("a", { class: "btn waves-effect waves-light", href: "/observer" }, "Observer"), h("a", { class: "btn waves-effect waves-light", href: "/chain" }, "Chain of Responsibility")))));
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-home"; }
+};

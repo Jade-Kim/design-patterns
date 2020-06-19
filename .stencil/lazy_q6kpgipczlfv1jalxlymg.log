@@ -1,0 +1,27 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { Editor } from '../../global/Memento/Editor';
+import { EditorHistory } from '../../global/Memento/EditorHistory';
+export const Memento = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("div", null, "memento", h("input", { placeholder: "Set Content", ref: el => this.userInput = el }), h("button", { class: "btn", onClick: () => this.setContent() }, "Set Content"), h("button", { class: "btn", onClick: () => this.goBack() }, "Go Back"), h("div", { id: "editorResult" })));
+    }
+    setContent() {
+        const editor = new Editor();
+        const state = editor.createState();
+        const history = new EditorHistory();
+        history.push(state);
+        editor.setContent(this.userInput.value);
+        debugger;
+        document.querySelector("#editorResult").innerHTML = this.userInput.value;
+    }
+    goBack() {
+        const history = new EditorHistory();
+        const previousContent = history.pop().getContent();
+        document.querySelector("#editorResult").innerHTML = previousContent;
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-memento"; }
+};

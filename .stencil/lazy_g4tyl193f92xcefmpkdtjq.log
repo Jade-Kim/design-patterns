@@ -1,0 +1,23 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { SaveBlogPost, SaveUserInfo } from '../../global/Template/concreteClass';
+import { User } from '../../global/Template/User';
+export const Template = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("div", { class: "margin20" }, h("h3", null, "Template Method Pattern"), h("input", { type: "text", ref: el => this.username = el, placeholder: "user name" }), h("input", { type: "text", ref: el => this.pw = el, placeholder: "password" }), h("input", { type: "text", ref: el => this.blog = el, placeholder: "blog post content" }), h("button", { class: "btn margin20", onClick: _ => this.saveUserInfo() }, "Save User Info"), h("button", { class: "btn margin20", onClick: _ => this.saveBlogPost() }, "Save Blog Info"), h("pattern-photos", { uml: "templateMethod-uml.png", imp: "templateMethod-i.png", cl: "templateMethod-1.png", cl2: "templateMethod-2.png" })));
+    }
+    saveUserInfo() {
+        const user = new User(this.username.value, this.pw.value);
+        const task = new SaveUserInfo(user);
+        task.execute();
+    }
+    saveBlogPost() {
+        const user = new User(this.username.value, this.pw.value);
+        const task = new SaveBlogPost(user, this.blog.value);
+        task.execute();
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-template"; }
+};

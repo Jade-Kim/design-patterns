@@ -1,0 +1,69 @@
+System.register(['./p-70e1058c.system.js'], function (exports) {
+    'use strict';
+    var registerInstance, h, Host;
+    return {
+        setters: [function (module) {
+                registerInstance = module.r;
+                h = module.h;
+                Host = module.H;
+            }],
+        execute: function () {
+            var Developer = /** @class */ (function () {
+                function Developer(name) {
+                    this.type = "Developer";
+                    this.name = name;
+                }
+                return Developer;
+            }());
+            var Tester = /** @class */ (function () {
+                function Tester(name) {
+                    this.type = "Tester";
+                    this.name = name;
+                }
+                return Tester;
+            }());
+            var EmployeeFactory = /** @class */ (function () {
+                function EmployeeFactory() {
+                    this.create = function (name, type) {
+                        switch (type) {
+                            case 1:
+                                return new Developer(name);
+                            case 2:
+                                return new Tester(name);
+                        }
+                    };
+                }
+                return EmployeeFactory;
+            }());
+            var Factory = exports('app_factory', /** @class */ (function () {
+                function class_1(hostRef) {
+                    registerInstance(this, hostRef);
+                }
+                class_1.prototype.render = function () {
+                    var _this = this;
+                    return (h(Host, null, h("slot", null, h("div", { ref: function (el) { return _this.result = el; } }))));
+                };
+                class_1.prototype.say = function (person) {
+                    this.result.innerHTML += "Hi, I am " + person.name + " and I am a " + person.type + "<br/>";
+                    //console.log("Hi, I am "+ person.name + " and I am a " + person.type);
+                };
+                class_1.prototype.componentDidLoad = function () {
+                    var _this = this;
+                    var employeeFactory = new EmployeeFactory();
+                    var employees = [];
+                    employees.push(employeeFactory.create("Jade", 1));
+                    employees.push(employeeFactory.create("John", 2));
+                    employees.forEach(function (person) {
+                        _this.say(person);
+                    });
+                };
+                Object.defineProperty(class_1, "style", {
+                    get: function () { return "STYLE_TEXT_PLACEHOLDER:app-factory"; },
+                    enumerable: true,
+                    configurable: true
+                });
+                return class_1;
+            }()));
+        }
+    };
+});

@@ -1,0 +1,27 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { Editor } from '../../global/Memento/Editor';
+import { EditorHistory } from '../../global/Memento/EditorHistory';
+export const MementoPattern = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.editor = new Editor();
+        this.history = new EditorHistory();
+    }
+    render() {
+        return (h("div", { class: "container" }, h("h3", null, "Memento Pattern"), h("input", { placeholder: "Note", ref: el => this.userInput = el }), h("div", { id: "mementoNote", ref: el => this.editorResult = el }), h("button", { class: "waves-effect waves-light btn-large left", onClick: () => this.setContent() }, "Set Content"), h("button", { class: "waves-effect waves-light btn-large pink right", onClick: () => this.undo() }, "Undo"), h("img", { src: "../../assets/memento.png" })));
+    }
+    setContent() {
+        const state = this.editor.createState();
+        this.history.push(state);
+        this.editor.setContent = this.userInput.value;
+        this.editorResult.innerHTML = this.userInput.value;
+        this.userInput.value = "";
+    }
+    undo() {
+        this.editor.restore(this.history.pop());
+        const previousContent = this.editor.getContent;
+        !previousContent ? this.editorResult.innerHTML = "" : this.editorResult.innerHTML = previousContent;
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-memento"; }
+};

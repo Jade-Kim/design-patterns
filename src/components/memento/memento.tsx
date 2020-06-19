@@ -46,7 +46,6 @@ export class Memento {
   }
 
   undo() {
-    console.log(this.history.pop());
     this.editor.restore(this.history.pop());
     const previousContent = this.editor.getContent;
 

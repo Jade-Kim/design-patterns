@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+.uml {
+  width: 100%;
+}
+
+.pattern-photos img {
+  display: block;
+}

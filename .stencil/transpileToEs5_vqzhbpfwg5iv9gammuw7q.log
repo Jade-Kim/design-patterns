@@ -1,0 +1,135 @@
+System.register(['./p-70e1058c.system.js'], function (exports) {
+    'use strict';
+    var registerInstance, h;
+    return {
+        setters: [function (module) {
+                registerInstance = module.r;
+                h = module.h;
+            }],
+        execute: function () {
+            var Package = /** @class */ (function () {
+                function Package(from, to, weight) {
+                    this.from = from;
+                    this.to = to;
+                    this.weight = weight;
+                }
+                return Package;
+            }());
+            var Shipping = /** @class */ (function () {
+                function Shipping() {
+                }
+                Shipping.prototype.setStrategy = function (company) {
+                    this.company = company;
+                };
+                Shipping.prototype.calculate = function (thePackage) {
+                    return this.company.calculate(thePackage);
+                };
+                return Shipping;
+            }());
+            var Fedex = /** @class */ (function () {
+                function Fedex() {
+                }
+                Fedex.prototype.calculate = function (thePackage) {
+                    return thePackage.weight * 10;
+                };
+                return Fedex;
+            }());
+            var UPS = /** @class */ (function () {
+                function UPS() {
+                }
+                UPS.prototype.calculate = function (thePackage) {
+                    return thePackage.weight * 9;
+                };
+                return UPS;
+            }());
+            var USPS = /** @class */ (function () {
+                function USPS() {
+                }
+                USPS.prototype.calculate = function (thePackage) {
+                    return thePackage.weight * 8;
+                };
+                return USPS;
+            }());
+            var TheImage = /** @class */ (function () {
+                function TheImage(fileName) {
+                    this.fileName = fileName;
+                }
+                return TheImage;
+            }());
+            var ImageStorage = /** @class */ (function () {
+                function ImageStorage() {
+                }
+                // private compressor: Compressor;
+                // private filter: Filter;
+                // constructor(compressor: Compressor, filter: Filter){
+                //     this.compressor = compressor;
+                //     this.filter = filter;
+                // }
+                // public setCompressor(compressor: Compressor){
+                //     this.compressor = compressor;
+                // }
+                // public setFilter(filter: Filter){
+                //     this.filter = filter;
+                // }
+                ImageStorage.prototype.store = function (image, compressor, filter) {
+                    compressor.compress(image);
+                    filter.on(image);
+                };
+                return ImageStorage;
+            }());
+            // Compressors
+            var PngCompressor = /** @class */ (function () {
+                function PngCompressor() {
+                }
+                PngCompressor.prototype.compress = function (image) {
+                    console.log("Compress PNG file " + image.fileName);
+                };
+                return PngCompressor;
+            }());
+            var SoftFilter = /** @class */ (function () {
+                function SoftFilter() {
+                }
+                SoftFilter.prototype.on = function (image) {
+                    console.log("Filter Soft applied on file " + image.fileName);
+                };
+                return SoftFilter;
+            }());
+            var Strategy = exports('app_strategy', /** @class */ (function () {
+                function class_1(hostRef) {
+                    registerInstance(this, hostRef);
+                }
+                class_1.prototype.render = function () {
+                    var _this = this;
+                    return (h("div", { class: "margin20" }, h("h3", null, "Strategy Pattern"), h("h6", { class: "grayHint" }, "- Allows you define a template operation, and set different behaviors into seperate classes"), h("h6", { class: "grayHint" }, "- \uC124\uC815\uD55C Strategy \uC5D0 \uB530\uB77C \uAC19\uC740 \uC774\uB984\uC758 \uBA54\uC18C\uB4DC\uAC00 \uB2E4\uB974\uAC8C \uC791\uB3D9\uD55C\uB2E4."), h("br", null), h("h5", null, "Example 1) Calculate shipping cost from different shipping companies "), h("div", { class: "row" }, h("div", { class: "col s4" }, h("input", { type: "text", placeholder: "From", ref: function (el) { return _this.from = el; } })), h("div", { class: "col s4" }, h("input", { type: "text", placeholder: "To", ref: function (el) { return _this.to = el; } })), h("div", { class: "col s4" }, h("input", { type: "number", placeholder: "Weight (lb)", ref: function (el) { return _this.weight = el; } }))), h("button", { class: "btn", onClick: function (_) { return _this.calculate(); } }, "CALCULATE SHIPPING COST"), h("div", { ref: function (el) { return _this.result = el; }, class: "resultDiv margin20" }), h("h5", null, "Example 2) Store the images that users upload "), h("input", { type: "text", placeholder: "File Name", ref: function (el) { return _this.fileName = el; } }), h("button", { class: "btn", onClick: function (_) { return _this.upload(); } }, "UPLOAD PHOTO"), h("div", { ref: function (el) { return _this.result2 = el; }, class: "resultDiv margin20" }), h("pattern-photos", { uml: "strategy-uml-2.png", uml2: "strategy-uml-1.png", imp: "strategy-i.png", cl: "strategy-1.png", cl2: "strategy-2.png" })));
+                };
+                class_1.prototype.calculate = function () {
+                    var from = this.from.value;
+                    var to = this.to.value;
+                    var weight = Number(this.weight.value);
+                    var thePackage = new Package(from, to, weight);
+                    var shipping = new Shipping();
+                    this.result.innerHTML = "";
+                    this.result.innerHTML += "From " + from + " To " + to + " <br/> Package " + weight + " lb <br/><br/>";
+                    shipping.setStrategy(new Fedex());
+                    this.result.innerHTML += "Fedex: $" + shipping.calculate(thePackage) + "<br/>";
+                    shipping.setStrategy(new UPS());
+                    this.result.innerHTML += "UPS: $" + shipping.calculate(thePackage) + "<br/>";
+                    shipping.setStrategy(new USPS());
+                    this.result.innerHTML += "USPS: $" + shipping.calculate(thePackage) + "<br/>";
+                };
+                class_1.prototype.upload = function () {
+                    var img = new TheImage(this.fileName.value);
+                    var imgStorage = new ImageStorage();
+                    imgStorage.store(img, new PngCompressor(), new SoftFilter());
+                    this.result2.innerHTML = "Check out the developer console.";
+                };
+                Object.defineProperty(class_1, "style", {
+                    get: function () { return "STYLE_TEXT_PLACEHOLDER:app-strategy"; },
+                    enumerable: true,
+                    configurable: true
+                });
+                return class_1;
+            }()));
+        }
+    };
+});

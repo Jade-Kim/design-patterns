@@ -1,0 +1,22 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { Authenticator, Logger } from '../../global/ChainOfResponsibility/Handler';
+import { WebServer } from '../../global/ChainOfResponsibility/WebServer';
+import { LoginRequest } from '../../global/ChainOfResponsibility/LoginRequest';
+export const Chain = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        // authenticator -> logger
+        this.logger = new Logger(null);
+        this.authenticator = new Authenticator(this.logger);
+        this.server = new WebServer(this.authenticator);
+    }
+    render() {
+        return (h("div", { class: "margin20" }, h("h3", null, "Chain of Responsiblility Pattern"), h("h6", { class: "grayHint" }, "- Allows building an order of request objects"), h("h6", { class: "grayHint" }, "- \uC694\uCCAD\uC744 \uC21C\uC11C\uB300\uB85C \uCCB4\uC778\uD654 \uD558\uACE0\uC790 \uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uD328\uD134"), h("br", null), h("input", { placeholder: "Username", ref: el => this.username = el }), h("input", { placeholder: "Password", ref: el => this.pw = el }), h("button", { class: "waves-effect waves-light btn-large margin20", onClick: () => this.login() }, "Log in"), this.result));
+    }
+    login() {
+        const request = new LoginRequest(this.username.value, this.pw.value);
+        this.server.handle(request);
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-chain"; }
+};

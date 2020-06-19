@@ -1,0 +1,25 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { Host, h } from "@stencil/core";
+import { IteratorPattern } from '../../global/Iterator/iterator';
+export const Iterator = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.items = [1, 2, "3", "4", true, 1.53];
+    }
+    render() {
+        return (h(Host, null, h("slot", null, this.items && this.items.map(item => h("p", null, item)), h("button", { onClick: _ => this.iterate1(this.items) }, "ITERATE starting from 0"), h("button", { onClick: _ => this.iterate2(this.items) }, "ITERATE starting from the end"), h("div", { ref: el => this.result = el }))));
+    }
+    iterate1(items) {
+        const iterator = new IteratorPattern(items, 0);
+        while (iterator.hasNext) {
+            this.result.innerHTML += iterator.nextItem() + "<br/>";
+        }
+    }
+    iterate2(items) {
+        const iterator = new IteratorPattern(items, 1);
+        while (iterator.hasNext) {
+            this.result.innerHTML += iterator.nextItem() + "<br/>";
+        }
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-iterator"; }
+};

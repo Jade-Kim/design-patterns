@@ -1,0 +1,11 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+export const AppHome = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("div", { class: 'app-home', id: "home" }, "Creational / Structural / Behavioral", h("a", { class: "btn waves-effect waves-light", href: "/memento" }, "Memento"), h("a", { class: "btn waves-effect waves-light", href: "/state" }, "State")));
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-home"; }
+};

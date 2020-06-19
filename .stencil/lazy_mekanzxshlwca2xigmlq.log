@@ -1,0 +1,18 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { User } from '../../global/Template/AbstractClass';
+import { SaveBlogPost } from '../../global/Template/concreteClass';
+export const Template = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("div", { class: "margin20" }));
+    }
+    componentDidLoad() {
+        const user = new User("Jade", "123");
+        const task = new SaveBlogPost(user);
+        task.execute();
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-template"; }
+};

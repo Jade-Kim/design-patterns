@@ -1,0 +1,25 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { Host, h } from "@stencil/core";
+import { EmployeeFactory } from '../../global/Factory/EmployeeFactory';
+export const Factory = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h(Host, null, h("slot", null, h("div", { ref: el => this.result = el }))));
+    }
+    say(person) {
+        this.result.innerText = "Hi, I am " + person.name + " and I am a " + person.type;
+        //console.log("Hi, I am "+ person.name + " and I am a " + person.type);
+    }
+    componentDidLoad() {
+        const employeeFactory = new EmployeeFactory();
+        const employees = [];
+        employees.push(employeeFactory.create("Jade", 1));
+        employees.push(employeeFactory.create("John", 2));
+        employees.forEach(person => {
+            this.say(person);
+        });
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-factory"; }
+};

@@ -8,7 +8,7 @@ export class Editor {
     }
 
     public restore(state: EditorState) {
-        this.content = state.getContent;
+        state ? this.content = state.getContent : this.content = null;
     }
 
     public get getContent() {
